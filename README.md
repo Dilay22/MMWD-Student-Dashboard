@@ -83,13 +83,13 @@ Used to generate motivational quotes dynamically on the dashboard.
 AcademIQ-
 login.html
 
-dashboard.html ,
+dashboard.html 
 
-style.css  ,
+style.css  
 
-app.js ,
+app.js 
 
-README.md ,
+README.md 
 
 ---
 
