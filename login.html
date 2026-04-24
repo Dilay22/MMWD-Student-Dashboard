@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AcademIQ — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="login-page">
+
+  <div class="login-bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <div class="login-wrap">
+
+    <!-- LEFT PANEL -->
+    <div class="login-left">
+      <div class="brand">
+        <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <span class="brand-name">AcademIQ</span>
+      </div>
+
+      <h1 class="login-title">Welcome back,<br><span>student.</span></h1>
+      <p class="login-sub">Your personal academic dashboard — tasks, schedule, notes, and motivation all in one place.</p>
+
+      <div class="feature-pills">
+        <div class="pill"><i class="fa-solid fa-check-circle"></i> Task Manager</div>
+        <div class="pill"><i class="fa-solid fa-calendar-week"></i> Weekly Schedule</div>
+        <div class="pill"><i class="fa-solid fa-note-sticky"></i> Notes</div>
+        <div class="pill"><i class="fa-solid fa-quote-left"></i> Daily Quotes</div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: FORM -->
+    <div class="login-right">
+      <div class="login-card">
+        <h2>Sign In</h2>
+        <p class="card-sub">Enter your details to access your dashboard</p>
+
+        <form id="loginForm" novalidate>
+
+          <div class="form-row">
+            <div class="fgroup">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" placeholder="e.g. Dilay" autocomplete="given-name"/>
+              <span class="ferr" id="err-fn"></span>
+            </div>
+            <div class="fgroup">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" placeholder="e.g. Yilmaz" autocomplete="family-name"/>
+              <span class="ferr" id="err-ln"></span>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <label for="password">Password <small>(max 7 characters)</small></label>
+            <div class="pw-wrap">
+              <input type="password" id="password" placeholder="Enter password" maxlength="7"/>
+              <button type="button" id="pwToggle" class="pw-eye" aria-label="Show password">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+            <div class="pw-strength-bar">
+              <div class="pw-fill" id="pwFill"></div>
+            </div>
+            <span class="pw-msg" id="pwMsg"></span>
+            <span class="ferr" id="err-pw"></span>
+          </div>
+
+          <button type="submit" class="btn-primary btn-block" id="loginBtn">
+            Enter Dashboard <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <p class="login-note"><i class="fa-solid fa-shield-halved"></i> Data saved locally in your browser</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
