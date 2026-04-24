@@ -80,12 +80,16 @@ Used to generate motivational quotes dynamically on the dashboard.
 ---
 
 ## Project Structure
-AcademIQ/
+AcademIQ-
 login.html
-dashboard.html
-style.css
-app.js
-README.md
+
+dashboard.html ,
+
+style.css  ,
+
+app.js ,
+
+README.md ,
 
 ---
 
