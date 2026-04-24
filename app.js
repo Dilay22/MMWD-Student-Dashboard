@@ -393,12 +393,12 @@ if (IS_DASHBOARD) {
 
   renderTasks();
 
-  /* ════════════════════════════════════════
+ /* ════════════════════════════════════════
      WEEKLY SCHEDULE
      ════════════════════════════════════════ */
   const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  let calItems = LS.get(K.calendar, []);
-  function saveCal() { LS.set(K.calendar, calItems); }
+  let calItems = LS.get('iq_calendar', []);
+  function saveCal() { LS.set('iq_calendar', calItems); }
 
   /* Clear time field on load so it's never pre-filled */
   const $calTime = document.getElementById('calTime');
@@ -433,13 +433,13 @@ if (IS_DASHBOARD) {
 
   document.getElementById('addCalBtn')?.addEventListener('click', () => {
     const day   = document.getElementById('calDay').value;
-    const time  = document.getElementById('calTime').value;
+    const time  = document.getElementById('calTime').value;   // user-picked, never defaulted
     const title = document.getElementById('calActivity').value.trim();
     if (!title) { alert('Please enter an activity.'); return; }
     calItems.push({ id: genId(), day, time, title });
     saveCal(); renderWeek();
     document.getElementById('calActivity').value = '';
-    document.getElementById('calTime').value     = '';
+    document.getElementById('calTime').value     = '';  // clear after adding
   });
 
   window.deleteCal = id => {
@@ -452,9 +452,9 @@ if (IS_DASHBOARD) {
   /* ════════════════════════════════════════
      NOTES
      ════════════════════════════════════════ */
-  let notes    = LS.get(K.notes, []);
+  let notes    = LS.get('iq_notes', []);
   let editNoteId = null;
-  function saveNotes() { LS.set(K.notes, notes); updateStats(); }
+  function saveNotes() { LS.set('iq_notes', notes); updateStats(); }
 
   function renderNotes() {
     const el = document.getElementById('notesList');
