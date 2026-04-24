@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AcademIQ — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="dash-page">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sb-brand">
+    <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+    <span class="brand-name">AcademIQ</span>
+    <button class="sb-close" id="sbClose"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <!-- PROFILE (editable inline) -->
+  <div class="sb-profile" id="sbProfile">
+    <div class="sb-avatar" id="sbAvatar">?</div>
+    <div class="sb-info">
+      <strong id="sbName">—</strong>
+      <span id="sbMajor">—</span>
+      <span id="sbYear">—</span>
+    </div>
+    <button class="edit-profile-btn" id="editProfileBtn" title="Edit profile">
+      <i class="fa-solid fa-pen"></i>
+    </button>
+  </div>
+
+  <!-- EDIT PROFILE FORM (hidden by default) -->
+  <div class="sb-edit-form" id="sbEditForm" style="display:none">
+    <div class="fgroup">
+      <label>Major / Department</label>
+      <select id="editMajor">
+        <option value="">— Select —</option>
+        <option>Computer Engineering</option>
+        <option>Software Engineering</option>
+        <option>Computer Science</option>
+        <option>Information Systems</option>
+        <option>Cyber Security</option>
+        <option>Data Science</option>
+        <option>Electrical Engineering</option>
+      </select>
+    </div>
+    <div class="fgroup">
+      <label>Year of Study</label>
+      <select id="editYear">
+        <option value="">— Select —</option>
+        <option>1st Year</option>
+        <option>2nd Year</option>
+        <option>3rd Year</option>
+        <option>4th Year</option>
+        <option>Postgraduate</option>
+      </select>
+    </div>
+    <div class="fgroup">
+      <label>Semester Goal <small>(optional)</small></label>
+      <input type="text" id="editGoal" placeholder="e.g. Pass all exams"/>
+    </div>
+    <div class="edit-form-btns">
+      <button class="btn-save-profile btn-primary" id="saveProfileBtn">Save</button>
+      <button class="btn-cancel-profile btn-ghost" id="cancelProfileBtn">Cancel</button>
+    </div>
+  </div>
+
+  <nav class="sb-nav">
+    <a href="#" class="sb-link active" data-target="sec-overview"><i class="fa-solid fa-house"></i> Overview</a>
+    <a href="#" class="sb-link" data-target="sec-tasks"><i class="fa-solid fa-list-check"></i> Tasks</a>
+    <a href="#" class="sb-link" data-target="sec-schedule"><i class="fa-solid fa-calendar-week"></i> Schedule</a>
+    <a href="#" class="sb-link" data-target="sec-notes"><i class="fa-solid fa-note-sticky"></i> Notes</a>
+  </nav>
+
+  <div class="sb-bottom">
+    <button class="theme-btn" id="themeBtn">
+      <i class="fa-solid fa-moon" id="themeIco"></i> <span id="themeTxt">Dark Mode</span>
+    </button>
+    <button class="logout-btn" id="logoutBtn">
+      <i class="fa-solid fa-right-from-bracket"></i> Logout
+    </button>
+  </div>
+
+</aside>
+
+<div class="sb-overlay" id="sbOverlay"></div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+      <div>
+        <h1 class="topbar-title" id="topbarTitle">Overview</h1>
+        <p class="topbar-sub" id="topbarSub">Welcome back!</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="clock-box">
+        <span class="clock-time" id="clockTime">00:00</span>
+        <span class="clock-date" id="clockDate">—</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <section class="sec active" id="sec-overview">
+
+    <!-- Hero -->
+    <div class="hero-card">
+      <div class="hero-text">
+        <p class="eyebrow"><i class="fa-solid fa-star"></i> Personal Dashboard</p>
+        <h2 id="heroGreeting">Hello, Student 👋</h2>
+        <p class="hero-goal" id="heroGoal">Set your semester goal in the sidebar!</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showSec('sec-tasks')"><i class="fa-solid fa-list-check"></i> My Tasks</button>
+          <button class="btn-ghost" onclick="showSec('sec-schedule')"><i class="fa-solid fa-calendar-week"></i> Schedule</button>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit-ring">
+          <div class="orbit-dot od1"></div>
+          <div class="orbit-dot od2"></div>
+        </div>
+        <span class="orbit-emoji">🎓</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card sc-teal">
+        <i class="fa-solid fa-list-check stat-ico"></i>
+        <div>
+          <p class="stat-lbl">Total Tasks</p>
+          <strong class="stat-val" id="stTasks">0</strong>
+        </div>
+      </div>
+      <div class="stat-card sc-blue">
+        <i class="fa-solid fa-hourglass-half stat-ico"></i>
+        <div>
+          <p class="stat-lbl">Pending</p>
+          <strong class="stat-val" id="stPending">0</strong>
+        </div>
+      </div>
+      <div class="stat-card sc-green">
+        <i class="fa-solid fa-circle-check stat-ico"></i>
+        <div>
+          <p class="stat-lbl">Done</p>
+          <strong class="stat-val" id="stDone">0</strong>
+        </div>
+      </div>
+      <div class="stat-card sc-purple">
+        <i class="fa-solid fa-note-sticky stat-ico"></i>
+        <div>
+          <p class="stat-lbl">Notes</p>
+          <strong class="stat-val" id="stNotes">0</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote widget (Fetch API + jQuery) -->
+    <div class="quote-card">
+      <div class="quote-header">
+        <i class="fa-solid fa-quote-left"></i>
+        <span>Daily Motivation</span>
+        <button class="quote-refresh" id="quoteRefresh" title="New quote">
+          <i class="fa-solid fa-rotate"></i>
+        </button>
+      </div>
+      <p class="quote-text" id="quoteText">Loading your daily inspiration…</p>
+      <p class="quote-author" id="quoteAuthor"></p>
+    </div>
+
+  </section>
+
+  <!-- ═══ TASKS ═══ -->
+  <section class="sec" id="sec-tasks">
+    <div class="sec-head">
+      <h2>Task Manager</h2>
+      <p>Add, complete, edit and delete your academic tasks</p>
+    </div>
+
+    <!-- Add task form -->
+    <div class="card form-card">
+      <div class="form-row">
+        <div class="fgroup fg-grow">
+          <label for="taskTitle">Task</label>
+          <input type="text" id="taskTitle" placeholder="e.g. Finish lab report"/>
+        </div>
+        <div class="fgroup">
+          <label for="taskCourse">Course</label>
+          <select id="taskCourse">
+            <option value="">Any</option>
+            <option>Computer Architecture</option>
+            <option>Multimedia Web Design</option>
+            <option>Operating Systems</option>
+            <option>Software Quality & Testing</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="taskPrio">Priority</label>
+          <select id="taskPrio">
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="taskDue">Due Date</label>
+          <input type="date" id="taskDue"/>
+        </div>
+      </div>
+      <button class="btn-primary" id="addTaskBtn"><i class="fa-solid fa-plus"></i> Add Task</button>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-f="all">All</button>
+      <button class="filter-btn" data-f="pending">Pending</button>
+      <button class="filter-btn" data-f="done">Done</button>
+      <button class="filter-btn" data-f="High">🔴 High</button>
+      <div class="search-wrap">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="taskSearch" placeholder="Search tasks…"/>
+      </div>
+    </div>
+
+    <div class="task-list" id="taskList"></div>
+  </section>
+
+  <!-- ═══ SCHEDULE ═══ -->
+  <section class="sec" id="sec-schedule">
+    <div class="sec-head">
+      <h2>Weekly Schedule</h2>
+      <p>Plan your week — add activities with a custom time</p>
+    </div>
+
+    <div class="card form-card">
+      <div class="form-row">
+        <div class="fgroup">
+          <label for="calDay">Day</label>
+          <select id="calDay">
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <label for="calTime">Time</label>
+          <!-- type="time" lets user freely pick any hour:minute -->
+          <input type="time" id="calTime"/>
+        </div>
+        <div class="fgroup fg-grow">
+          <label for="calActivity">Activity</label>
+          <input type="text" id="calActivity" placeholder="e.g. Operating Systems lecture"/>
+        </div>
+      </div>
+      <button class="btn-primary" id="addCalBtn"><i class="fa-solid fa-plus"></i> Add to Schedule</button>
+    </div>
+
+    <div class="week-grid" id="weekGrid"></div>
+  </section>
+
+  <!-- ═══ NOTES ═══ -->
+  <section class="sec" id="sec-notes">
+    <div class="sec-head">
+      <h2>Notes</h2>
+      <p>Write and save your personal study notes</p>
+    </div>
+
+    <div class="card form-card">
+      <div class="fgroup">
+        <label for="noteTitle">Title <small>(optional)</small></label>
+        <input type="text" id="noteTitle" placeholder="e.g. OS Study Notes"/>
+      </div>
+      <div class="fgroup">
+        <label for="noteBody">Note</label>
+        <textarea id="noteBody" rows="4" placeholder="Write your note here…"></textarea>
+      </div>
+      <button class="btn-primary" id="addNoteBtn"><i class="fa-solid fa-floppy-disk"></i> Save Note</button>
+    </div>
+
+    <div class="notes-grid" id="notesList"></div>
+  </section>
+
+</main>
+
+<!-- LOGOUT CONFIRM MODAL -->
+<div class="modal-bg" id="logoutModal">
+  <div class="modal-box">
+    <i class="fa-solid fa-right-from-bracket modal-ico"></i>
+    <h3>Log out?</h3>
+    <p>This will clear your session and return you to the login page.</p>
+    <label class="chk-row">
+      <input type="checkbox" id="clearDataChk"/>
+      Also clear all tasks, notes and schedule
+    </label>
+    <div class="modal-btns">
+      <button class="btn-ghost" id="cancelLogout">Cancel</button>
+      <button class="btn-danger" id="confirmLogout">Yes, logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- TASK EDIT MODAL -->
+<div class="modal-bg" id="editTaskModal">
+  <div class="modal-box">
+    <h3>Edit Task</h3>
+    <div class="fgroup">
+      <label>Task Title</label>
+      <input type="text" id="etTitle"/>
+    </div>
+    <div class="fgroup">
+      <label>Course</label>
+      <select id="etCourse">
+        <option value="">Any</option>
+        <option>Computer Architecture</option>
+        <option>Multimedia Web Design</option>
+        <option>Operating Systems</option>
+        <option>Software Quality & Testing</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="fgroup">
+      <label>Priority</label>
+      <select id="etPrio">
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+    <div class="fgroup">
+      <label>Due Date</label>
+      <input type="date" id="etDue"/>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-ghost" id="cancelEditTask">Cancel</button>
+      <button class="btn-primary" id="saveEditTask">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
