@@ -66,14 +66,6 @@ Used to generate motivational quotes dynamically on the dashboard.
 
 ---
 
-## Live Deployment URL
-If deployed:
-(Add deployment link here if applicable)
-
-Currently tested locally using Live Server.
-
----
-
 
 ## Features
 - User login interface
