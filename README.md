@@ -81,6 +81,7 @@ Used to generate motivational quotes dynamically on the dashboard.
 
 ## Project Structure
 AcademIQ-
+
 login.html
 
 dashboard.html 
