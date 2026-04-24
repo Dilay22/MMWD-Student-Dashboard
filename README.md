@@ -81,11 +81,11 @@ Used to generate motivational quotes dynamically on the dashboard.
 
 ## Project Structure
 AcademIQ/
-├── login.html
-├── dashboard.html
-├── style.css
-├── app.js
-└── README.md
+login.html
+dashboard.html
+style.css
+app.js
+README.md
 
 ---
 
