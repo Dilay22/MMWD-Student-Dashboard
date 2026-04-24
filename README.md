@@ -37,7 +37,7 @@ The goal of the project is to improve student organization, productivity, and ac
 ## How to Run the Project Locally
 
 ### 1. Clone the Repository
-git clone https://github.com/yourusername/AcademIQ.git
+git clone https://github.com/MMWD-Student-Dashboard/tree/main
 
 ### 2. Open Project Folder
 Open the project in Visual Studio Code.
